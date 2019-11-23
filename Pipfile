@@ -11,6 +11,3 @@ pyrr = "*"
 moderngl = "*"
 moderngl-window = {extras = ["tk"],version = "*"}
 pillow = "*"
-
-[requires]
-python_version = "3.6"
