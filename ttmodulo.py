@@ -5,7 +5,8 @@ Implements the MVP matrix with some basic cubes
 
 import moderngl_window as mglw
 from moderngl_window.conf import settings
-from glutils import Model, SpeedRegulator
+from glutils import Model
+from mathutils import SpeedRegulator
 import numpy as np
 import colorsys
 import math

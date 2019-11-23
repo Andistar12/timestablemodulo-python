@@ -3,14 +3,14 @@ Andy Nguyen, 11/22/19
 Implements the MVP matrix with some basic cubes
 """
 
-import moderngl as gl
+import math
+import colorsys
+import numpy as np
 import moderngl_window as mglw
 from moderngl_window.conf import settings
-from glutils import Model, SpeedRegulator
-from mathutils import PositionMatrix, ViewportMatrix
-import numpy as np
-import colorsys
-import math
+import glutils
+from glutils import Model
+from mathutils import PositionMatrix, ViewportMatrix, SpeedRegulator
 
 class MyWindow:
 
@@ -27,7 +27,7 @@ class MyWindow:
             "cursor": cursor,
             "samples": 0
         }
-        settings.WINDOW = dict(list(settings.WINDOW.items()) + list(config.items()))
+        mglw.conf.settings.WINDOW = dict(list(settings.WINDOW.items()) + list(config.items()))
         self.window = mglw.create_window_from_settings()
         self.ctx = self.window.ctx
 
@@ -43,9 +43,11 @@ class MyWindow:
     def destroy(self):
         pass
 
-# Create window and shaders
+# Initiate OpenGL, create window and program
 window = MyWindow((3,3), (750, 750), False, True, "Cube Window", True)
 ctx = mglw.ctx()
+glutils.enable_depth_test(ctx)
+glutils.enable_cull_face(ctx)
 prog = ctx.program(
     vertex_shader="""
         #version 330
@@ -108,30 +110,29 @@ cube.add_vertex_data("color", "3f", cube_colors.astype("f4"))
 cube.create_vao(prog)
 
 # Matrices
-model_pos = PositionMatrix([0,0,0], 0,0,0,1)
+model_pos = PositionMatrix([0,0,0], 0,0,0,1.25)
 model2_pos = PositionMatrix([0,0,-3],0,180,0,1)
 vpc = ViewportMatrix([0,0, 0],25,0,0,750,750,90,0.1,25,True,8)
 
 # Prep for rendering
 speedreg = SpeedRegulator(1)
 last_fps = 0
-ctx.enable_only(gl.DEPTH_TEST | gl.CULL_FACE)
 
 while not window.should_close():
 
-    # Begin calculations
+    # Perform calculations
     speed = speedreg.get_next_delta()
     vpc.yaw = (vpc.yaw + 90 * speed) % 360
+    vpc.build_view_matrix()
 
     # Prep rendering
     window.clear()
-    ctx.clear()
-    prog["u_vpc"].write(vpc.get_matrix().astype("f4"))
+    prog["u_vpc"].write(vpc.get_matrix())
 
     # Draw models
-    prog["u_mm"].write(model_pos.get_matrix().astype("f4"))
+    prog["u_mm"].write(model_pos.get_matrix())
     cube.draw_triangles()
-    prog["u_mm"].write(model2_pos.get_matrix().astype("f4"))
+    prog["u_mm"].write(model2_pos.get_matrix())
     cube.draw_triangles()
 
     # End rendering
