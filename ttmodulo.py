@@ -11,6 +11,18 @@ import numpy as np
 import colorsys
 import math
 
+# Model constants
+VERTEX_COUNT = 1000
+MULTIPLIER = 0
+MULTIPLIER_DERIV = 1.0
+CIRCLE_RADIUS = 1.0
+HSV = 0.0
+HSV_DERIV = 0.1
+SATURATION = 0.7
+VALUE = 0.9
+WINDOW_DIMS = (1400, 1400)
+
+
 class MyWindow:
 
     def __init__(self, gl_version, size, fullscreen, resizable, title, cursor):
@@ -43,7 +55,7 @@ class MyWindow:
         pass
 
 # Create window and shaders
-window = MyWindow((3,3), (750, 750), False, True, "TTModulo", True)
+window = MyWindow((3,3), WINDOW_DIMS, False, True, "TTModulo", True)
 ctx = mglw.ctx()
 prog = ctx.program(
     vertex_shader="""
@@ -82,16 +94,6 @@ def gen_indices(vertex_count, multiplier):
         indices_array.append(int( (i * multiplier) % vertex_count))
                                                             
     return np.array(indices_array, dtype=np.int32)
-
-# Model constants
-VERTEX_COUNT = 500
-MULTIPLIER = 4.0
-MULTIPLIER_DERIV = 1.0
-CIRCLE_RADIUS = 1.0
-HSV = 0.0
-HSV_DERIV = 0.125
-SATURATION = 1.0
-VALUE = 1.0
 
 # Generate model
 vertex_array = gen_vertices(VERTEX_COUNT, CIRCLE_RADIUS)
