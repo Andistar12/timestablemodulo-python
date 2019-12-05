@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3b64536622694320cfe84c217eff4dc6b0e5a32935b91524210e71cbf6fc11ac"
+            "sha256": "c60f45505605f29b59bfd27f7ea3c8f8e69c2d8b8d2e921cc45be51d4010d6ac"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -123,7 +123,6 @@
                 "sha256:e0697b826da6c2472bb6488db4c0a7fa8af0d52fa08833ceb3681358914b14e5",
                 "sha256:e9a3edd5f714229d41057d56ac0f39ad9bdba6767e8c888c951869f0bdd129b0"
             ],
-            "index": "pypi",
             "version": "==6.2.1"
         },
         "pyglet": {
@@ -135,10 +134,9 @@
         },
         "pyopengl": {
             "hashes": [
-                "sha256:9b47c5c3a094fa518ca88aeed35ae75834d53e4285512c61879f67a48c94ddaf",
-                "sha256:efa4e39a49b906ccbe66758812ca81ced13a6f26931ab2ba2dba2750c016c0d0"
+                "sha256:0bdf5ed600df30c8830455702338902528717c0af85ac5914f1dc5aa0bfa6eee"
             ],
-            "version": "==3.1.0"
+            "version": "==3.1.4"
         },
         "pyopengltk": {
             "hashes": [

@@ -10,4 +10,3 @@ numpy = "*"
 pyrr = "*"
 moderngl = "*"
 moderngl-window = {extras = ["tk"],version = "*"}
-pillow = "*"
