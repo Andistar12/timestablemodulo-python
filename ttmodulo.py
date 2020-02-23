@@ -1,6 +1,6 @@
 """
 Andy Nguyen, 11/22/19
-Implements the MVP matrix with some basic cubes
+Rendering times tables using modular arithmetic
 """
 
 import moderngl_window as mglw
