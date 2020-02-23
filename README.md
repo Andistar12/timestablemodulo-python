@@ -48,4 +48,3 @@ This project uses the following libraries:
 * `glutils.py`: Utilities to interface with OpenGL 
 * `mathutils.py`: Classes facilitating math operations
 * `Pipfile`, `Pipfile.lock`: For pipenv
-* `old/`: Miscellaneous programs unrelated to the project
